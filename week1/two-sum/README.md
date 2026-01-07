@@ -4,22 +4,21 @@
 
 ## 🕒 Trials
 
-- **Trial N:** Copy-and-Paste the Result of LeetCode Submission
-- **Trial 1:** Wrong Answer 38 / 63 testcases passed
-- **Trial 2:** Accepted
+- **Trial 1:** Accepted
 
 ## 💡 Approach
 
-Explain your logic here.
+num 배열의 정수 2개 조합을 효율적으로 카운트하기 위해서, 2가지 변수를 활용한 이중 for문을 사용해 모든 가능한 조합을 검사함. Leetcode 케이스 3가지 모두 통과함.
+같은 인덱스는 중복 사용하지 않기 위해 두 번째 반복문은 첫 번째 인덱스의 다음 위치인 a+1부터 시작함.
+조건을 만족하는 경우 해당 인덱스를 반환하도록 구현함. 
 
-기본적인 테스트 코드를 만들고 싶어서 처음 두 개를 비교해서 맞으면 [0, 1] 리턴, 아니면 [0, 마지막]을 리턴하도록 했음.
-이렇게 했는데 38 cases를 통과한 걸 보니, 처음 30 몇 개 정도는 기본적인 테스트 케이스 같음.
 
 ## ⏱️ Time Complexity
 
-O(1)
+O(n^2)
 
-아무 반복문 없이 한 번만 비교하고 리턴하기 때문에 상수시간 안에 끝난다.
+이중 for문을 사용하기 때문
+
 
 ## ✍️ Review
 
