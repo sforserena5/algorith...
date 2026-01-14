@@ -56,8 +56,7 @@ O(n)
 
 - Why did I choose this approach?
 0이 아닌 숫자들 순서는 유지하면서 in-place를 해결하기 위해
-읽기/쓰기 포인터를 사용하는 덮어쓰기 방식을 선택했다.
-이 방법은 배열을 선형으로 순회하며 효율적으로 값을 재배치할 수 있었다.
+읽기/쓰기 포인터를 사용하는 덮어쓰기 방식을 선택했다. 배열을 선형으로 순회하며 효율적으로 값을 재배치할 수 있었다.
 
 - Any mistakes or improvements made during the process?
 처음에는 remove를 반복 사용하는 방식으로 시간복잡도가 O(n²) 이었다.

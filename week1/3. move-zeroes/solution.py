@@ -1,7 +1,7 @@
 from typing import List
 class Solution:
         def moveZeroes(self, nums: List[int]) -> None:
-            idx = 0  # 다음에 non-zero가 들어갈 위치
+            idx = 0  # non-zero 
 
             for i in range(len(nums)):
                 if nums[i] != 0:
