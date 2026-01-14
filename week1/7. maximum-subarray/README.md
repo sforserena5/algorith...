@@ -4,79 +4,32 @@
 
 ## 🕒 Trials
 
-- **Trial 1:** Accepted.. but time complexity is O(n^3)
+- **Trial 1:** Accepted
 
     class Solution:
-        def threeSum(self, nums: List[int]) -> List[List[int]]:
-            seen = set()
-            blank = []
-            for i in range (0, len(nums)):
-                for j in range (i+1, len(nums)):
-                    for k in range(j+1, len(nums)):
-                        if nums[i] + nums[j]+ nums[k] ==0:
-                            to_tuple = tuple(sorted([nums[i], nums[j], nums[k]]))
-                            if to_tuple not in seen: # 여기서 seen으로 중복 거름 
-                                seen.add(to_tuple) # 이 add로도 거름!
-                                blank.append(list(to_tuple))
-            return blank
+        def maxSubArray(self, nums: List[int]) -> int:
+            cur = best = nums[0]
 
-- **Trial 2:** Accepted..gpt 도움 받음!!
-
-    class Solution:
-        def threeSum(self, nums: List[int]) -> List[List[int]]:
-            nums.sort()
-            res = []
-            n = len(nums)
-
-            for i in range(n):
-                # i 중복 제거
-                if i > 0 and nums[i] == nums[i - 1]:
-                    continue
-
-                # nums[i]가 0보다 크면 뒤도 전부 0보다 크거나 같으므로 합이 0 불가
-                if nums[i] > 0:
-                    break
-
-                left, right = i + 1, n - 1
-                while left < right:
-                    s = nums[i] + nums[left] + nums[right]
-
-                    if s == 0:
-                        res.append([nums[i], nums[left], nums[right]])
-                        left += 1
-                        right -= 1
-
-                        # left 중복 제거
-                        while left < right and nums[left] == nums[left - 1]:
-                            left += 1
-                        # right 중복 제거
-                        while left < right and nums[right] == nums[right + 1]:
-                            right -= 1
-
-                    elif s < 0:
-                        left += 1
-                    else:
-                        right -= 1
-
-            return res
-
+            for x in nums[1:]:
+                cur = max(x, cur + x) # cur 업데이트 _ 지금 보고 있는 위치에서 끝나는 최대 부분합
+                best = max(best, cur) # best 업데이트 _ 지금까지 본 모든 부분합 중 최대값
+    
+            return best
 
 
 ## 💡 Approach
-    nums를 우선 정렬하고, 인덱스 i를 0부터 고정하면서(첫 번째 수)
-    나머지 두 수는 left=i+1, right=n-1로 두고 합이 0이 되도록 left/right를 좁혀가며 탐색
-    중복 값은 스킵해서 결과 중복을 방지
-    정렬되어 있으니, 합이 작으면(left++ ) 더 큰 값을 만들고, 합이 크면(right-- ) 더 작은 값을 만든다.
-    테스트 2개 통과함!
+    연속된 부분 배열의 합을 구하는 문제이므로,
+    배열을 왼쪽부터 하나씩 순회하면서 현재 위치까지의 최대 부분합을 유지하는 방식으로 접근했다.
+    테스트 3개 통과함!
 
 ## ⏱️ Time Complexity
 
-    O(n^2)    
+    O(n)
+    배열을 한 번만 순회하므로
 
 ## ✍️ Review
 
 - Why did I choose this approach?
-매수와 매도의 순서를 유지하면서 최대 이익을 구하기 위해, 배열을 한 번만 순회하며 최저가를 갱신하는 풀이를 선택했다.
-
-- Any mistakes or improvements made during the process?
-첫번째 시도법은 문제 입력 범위가 의도하는 알고리즘(O(n²))과 맞지 않음...
+    이 문제의 입력 크기가 크기 때문에 모든 부분 배열을 검사하는 방식은 비효율적이라고 판단했다.
+    현재까지의 합이 음수가 되는 순간 이후의 합에 오히려 손해가 된다는 점에 착안하여,
+    부분 배열을 계속 유지할지 아니면 새로 시작할지를 매 단계에서 결정하는 방식이 가장 효율적이라고 생각했다. 
